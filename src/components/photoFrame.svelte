@@ -41,6 +41,6 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		background-color: rgb(183 255 159 / 79%);
+		background-color: rgb(183 255 159 / 59%);
 	}
 </style>
