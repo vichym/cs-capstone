@@ -1,5 +1,5 @@
 <script>
-	export let picture;
+	export let picture, base64Image;
 	let fileinput;
 	let windowH;
 	let windowW;
@@ -9,11 +9,13 @@
 	$: mwidth = windowW * 0.9;
 
 	const onFileSelected = (e) => {
-		let image = e.target.files[0];
 		let reader = new FileReader();
-		reader.readAsDataURL(image);
+		//  For previewing
+		reader.readAsDataURL(e.target.files[0]);
+		//  Set image to return to parent component
 		reader.onload = (e) => {
 			picture = e.target.result;
+			base64Image = reader.result.replace('data:image/png;base64,', '');
 		};
 	};
 </script>

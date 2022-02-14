@@ -1,6 +1,6 @@
 <script>
 	export let picture;
-	export let loading;
+	export let loadingPromise;
 	import { Card, CardImg, Spinner } from 'sveltestrap';
 	let michael = '../../static/michael-scott.gif';
 </script>
@@ -10,9 +10,15 @@
 		<div class="picture">
 			<CardImg class=" img-thumbnail" src={picture} alt="d" />
 		</div>
-		<div class="card-img-overlay {loading && 'd-flex'}">
-			<Spinner info />
-			<p>Processing</p>
+		<div class="card-img-overlay d-flex">
+			{#await loadingPromise}
+				<Spinner info />
+				<p>Processing</p>
+			{:then}
+				<p class="success">Success !</p>
+			{:catch error}
+				<p style="color: red">{error.message}</p>
+			{/await}
 		</div>
 	</Card>
 {:else}
@@ -26,11 +32,15 @@
 		max-width: 15em;
 		max-height: 15em;
 	}
+	.success {
+		font-size: medium;
+		font-weight: bold;
+	}
 	.card-img-overlay {
 		display: none;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		background-color: rgba(195, 122, 255, 0.411);
+		background-color: rgb(183 255 159 / 79%);
 	}
 </style>

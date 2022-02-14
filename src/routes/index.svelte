@@ -1,12 +1,9 @@
 <script>
-	import { fade, fly } from 'svelte/transition';
-	import { Button } from 'sveltestrap';
 	import Welcome from '../components/section1.svelte';
 	import About from '../components/section2.svelte';
 	import CNN from '../components/section3.svelte';
 	let toggleMenu = false;
 	let scrollY;
-
 	const wheel = (node, options) => {
 		let { scrollable } = options;
 

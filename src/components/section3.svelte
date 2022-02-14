@@ -3,9 +3,28 @@
 	import Result from './result.svelte';
 	import PhotoFrame from './photoFrame.svelte';
 	import Arrow from './arrow.svelte';
-
 	let image;
-	let processingStatus;
+	let base64Image;
+	let predictionPromise;
+
+	async function getPredition(encodeImage) {
+		const result = await fetch('http://127.0.0.1:5000/predict', {
+			method: 'post',
+			body: JSON.stringify({ image: encodeImage })
+		})
+			.then((res) => {
+				return res.json();
+			})
+			.then((res) => res.prediction)
+			.catch((error) => {
+				throw new Error(error);
+			});
+		return result;
+	}
+	$: console.log(predictionPromise);
+	$: if (base64Image) {
+		predictionPromise = getPredition(base64Image);
+	}
 </script>
 
 <section id="cnntool-section" class="cnntool-section">
@@ -15,15 +34,15 @@
 		</div>
 		<div class="p-2 bd-highlight justify-content-center w-100 dashboard">
 			<div class=" container arrow1">
-				<Arrow />
+				<Arrow animate />
 			</div>
 			<div class=" container arrow2">
-				<Arrow down animate />
+				<Arrow animate />
 			</div>
 			<div class="upload container">
 				<div class="counter"><h1>1</h1></div>
 				<div class=" container content">
-					<Upload bind:picture={image} />
+					<Upload bind:picture={image} bind:base64Image />
 				</div>
 			</div>
 			<div class="preview container">
@@ -31,7 +50,7 @@
 					<h1>2</h1>
 				</div>
 				<div class=" container content">
-					<PhotoFrame bind:picture={image} bind:loading={processingStatus} />
+					<PhotoFrame bind:picture={image} bind:loadingPromise={predictionPromise} />
 				</div>
 			</div>
 			<div class="result container">
@@ -39,7 +58,7 @@
 					<h1>3</h1>
 				</div>
 				<div class=" container content align-items-start">
-					<Result />
+					<Result bind:prediction={predictionPromise} />
 				</div>
 			</div>
 		</div>
