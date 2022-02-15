@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "dev-host": "svelte-kit dev --host",
+    "start": "node build/index.js",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",
@@ -22,6 +23,11 @@
   },
   "type": "module",
   "dependencies": {
+    "@sveltejs/adapter-node": "^1.0.0-next.68",
     "sveltestrap": "^5.8.4"
-  }
+  },
+  "engines": {    
+    "node": "16.14.0",
+    "npm": "8.3.1"
+}
 }

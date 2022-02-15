@@ -53,10 +53,4 @@
 		justify-content: center;
 		padding: 1em;
 	}
-
-	#info {
-		position: fixed;
-		right: 10%;
-		top: 10%;
-	}
 </style>

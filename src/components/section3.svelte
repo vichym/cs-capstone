@@ -140,9 +140,5 @@
 				'arrow2'
 				'result';
 		}
-
-		.rotate {
-			transform: rotate(90deg);
-		}
 	}
 </style>

@@ -16,11 +16,6 @@ by : Manel Roig
 </div>
 
 <style>
-	a {
-		text-decoration: none;
-		color: #ffff;
-	}
-
 	.center-con {
 		display: flex;
 		height: 3em;
