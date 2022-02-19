@@ -22,7 +22,7 @@
 	</Card>
 {:else}
 	<div class="picture">
-		<img class=" img-thumbnail picture" src="build/static/house.png" alt="d" />
+		<img class=" img-thumbnail picture" src="/house.png" alt="d" />
 	</div>
 {/if}
 
