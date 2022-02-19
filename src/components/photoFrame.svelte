@@ -2,7 +2,7 @@
 	export let picture;
 	export let loadingPromise;
 	import { Card, CardImg, Spinner } from 'sveltestrap';
-	let michael = '../../static/michael-scott.gif';
+	let michael = '../static/michael-scott.gif';
 </script>
 
 {#if picture}

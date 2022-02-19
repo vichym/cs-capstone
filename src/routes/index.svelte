@@ -1,49 +1,49 @@
 <script>
 	import Welcome from '../components/section1.svelte';
 	import About from '../components/section2.svelte';
+	import { elasticIn, quintInOut, circOut } from 'svelte/easing';
 	import CNN from '../components/section3.svelte';
 	let toggleMenu = false;
-	let scrollY;
-	const wheel = (node, options) => {
-		let { scrollable } = options;
+	function handleMenu() {
+		toggleMenu = true;
+	}
 
-		const handler = (e) => {
-			if (!scrollable) e.preventDefault();
-		};
-
-		node.addEventListener('wheel', handler, { passive: false });
-
+	function circle(node, { delay = 0, duration = 300, easing = linear }) {
 		return {
-			update(options) {
-				scrollable = options.scrollable;
-			},
-			destroy() {
-				node.removeEventListener('wheel', handler, { passive: false });
-			}
+			delay,
+			duration,
+			easing,
+			css: (t) => `
+			clip-path: circle(${t * 80 + 2}%);
+		`
 		};
-	};
+	}
 </script>
-
-<svelte:window bind:scrollY />
-<!-- <svelte:window bind:scrollY use:wheel={false} /> -->
 
 <svelte:head>
 	<style>
-		@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;302;500;900&display=swap');
+		@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
 	</style>
 	<script src="https://kit.fontawesome.com/8d3d8f3c09.js" crossorigin="anonymous"></script>
 </svelte:head>
 
 <main>
-	<Welcome />
-	<CNN />
+	{#if !toggleMenu}
+		<div out:circle={{ duration: 1000, easing: quintInOut }}>
+			<Welcome on:toggle={handleMenu} />
+		</div>
+	{:else}
+		<div in:circle={{ delay: 1500, duration: 3000, easing: elasticIn }}>
+			<CNN />
+		</div>
+	{/if}
 	<!-- <About /> -->
 </main>
 
 <style>
 	:global(body) {
-		font-family: 'Nunito', sans-serif;
-		background-color: aquamarine;
+		font-family: 'Rajdhani', sans-serif;
+		background-color: black;
 	}
 	:global(section) {
 		display: flex;

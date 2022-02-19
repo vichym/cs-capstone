@@ -1,10 +1,7 @@
 <script>
 	export let prediction;
-	// export let result = [
-	// 	{ type: '1', prediction: '0.8' },
-	// 	{ type: '5', prediction: '0.01' }
-	// ];
-	// import { Progress, Table } from 'sveltestrap';
+	import { Table, Tooltip } from 'sveltestrap';
+	import { fade, slide } from 'svelte/transition';
 	// import Api from './api.svelte';
 
 	function typewriter(node, { speed = 1 }) {
@@ -27,34 +24,40 @@
 	}
 </script>
 
-<!-- <Table borderless>
-	<thead>
-		<tr>
-			<th>Classification</th>
-			<th>Predition</th>
-		</tr>
-	</thead>
-
-	<tbody>
-		{#each result as { type, prediction }}
-			<tr>
-				<th scope="row">{type}</th>
-				<td><Progress value={prediction * 100} /></td>
-			</tr>
-		{/each}
-	</tbody>
-</Table> -->
-
 <div class="container">
 	{#await prediction}
-		Loading...
+		<div in:typewriter={{ delaye: 500, speed: 2 }}>Loading...</div>
 	{:then value}
 		{#if value}
-			<div class="result" in:typewriter>
-				{value}
+			<div class="container inner-container">
+				<Table borderless class="table-sm table-hover mb-0">
+					<thead>
+						<tr>
+							<th>Guess</th>
+							<th>Confidence</th>
+							<!-- <th>Conf</th> -->
+						</tr>
+					</thead>
+					<tbody in:fade={{ duration: 500 }} class="table-body">
+						{#each value.order as class_name}
+							<tr class="entries" transition:slide>
+								<td>{class_name}</td>
+								<td
+									><progress value={parseFloat(value.confidence[class_name])} id={class_name} /></td
+								>
+							</tr>
+							<Tooltip target={class_name} placement="right"
+								>{parseFloat(value.confidence[class_name])}</Tooltip
+							>
+						{/each}
+					</tbody>
+				</Table>
+				<div class="container result" in:typewriter>
+					{value.order[0]}
+				</div>
 			</div>
 		{:else}
-			<div class="hint" in:typewriter>Upload a Car Picture to Start</div>
+			<div class="hint" in:typewriter={{ speed: 0.5 }}>Upload a Car Picture to Start</div>
 		{/if}
 	{/await}
 </div>
@@ -69,7 +72,15 @@
 		justify-content: center;
 		align-items: center;
 	}
+	.inner-container {
+		flex-direction: column;
+	}
+	.entries {
+		font-size: smaller;
+		font-weight: normal;
+	}
 	.result {
+		background-color: aliceblue;
 		font-size: large;
 		font-weight: bolder;
 	}

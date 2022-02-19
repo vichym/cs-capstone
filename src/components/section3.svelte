@@ -15,7 +15,10 @@
 			.then((res) => {
 				return res.json();
 			})
-			.then((res) => res.prediction)
+			.then((res) => {
+				console.log(res.vgg16_2_model);
+				return res.vgg16_2_model;
+			})
 			.catch((error) => {
 				throw new Error(error);
 			});
@@ -30,7 +33,7 @@
 <section id="cnntool-section" class="cnntool-section">
 	<div>
 		<div class="header">
-			<h2>CNN Image Classifier</h2>
+			<h1>CNN Image Classifier</h1>
 		</div>
 		<div class="p-2 bd-highlight justify-content-center w-100 dashboard">
 			<div class=" container arrow1">
@@ -40,25 +43,33 @@
 				<Arrow animate />
 			</div>
 			<div class="upload container">
-				<div class="counter"><h1>1</h1></div>
-				<div class=" container content">
-					<Upload bind:picture={image} bind:base64Image />
+				<div class="container wrapper">
+					<div class="counter">
+						<h1>1</h1>
+					</div>
+					<div class=" container content">
+						<Upload bind:picture={image} bind:base64Image />
+					</div>
 				</div>
 			</div>
 			<div class="preview container">
-				<div class="  counter">
-					<h1>2</h1>
-				</div>
-				<div class=" container content">
-					<PhotoFrame bind:picture={image} bind:loadingPromise={predictionPromise} />
+				<div class="container wrapper">
+					<div class="  counter">
+						<h1>2</h1>
+					</div>
+					<div class=" container content">
+						<PhotoFrame bind:picture={image} bind:loadingPromise={predictionPromise} />
+					</div>
 				</div>
 			</div>
 			<div class="result container">
-				<div class="counter">
-					<h1>3</h1>
-				</div>
-				<div class=" container content align-items-start">
-					<Result bind:prediction={predictionPromise} />
+				<div class="container wrapper">
+					<div class="counter ">
+						<h1>3</h1>
+					</div>
+					<div class=" container content">
+						<Result bind:prediction={predictionPromise} />
+					</div>
 				</div>
 			</div>
 		</div>
@@ -67,7 +78,7 @@
 
 <style>
 	.cnntool-section {
-		background-color: violet;
+		background: url('../static/ai.jpg');
 		display: flex;
 		width: 100%;
 		height: 100%;
@@ -75,7 +86,7 @@
 
 	.dashboard {
 		display: grid;
-		grid-template-columns: 1fr 4em 1fr 4em 1fr;
+		grid-template-columns: 1fr 2em 1fr 2em 1fr;
 		grid-template-areas: 'upload arrow1 preview  arrow2  result';
 		grid-row-gap: 0.5rem;
 		grid-column-gap: 1rem;
@@ -87,22 +98,28 @@
 		width: 100%;
 		height: 100%;
 		padding: 0;
-		background: antiquewhite;
 		justify-content: center;
 		align-items: center;
 	}
 	.header {
 		display: flex;
+		color: white;
 		justify-content: center;
 		align-items: center;
-		background-color: thistle;
 		margin-left: 0.5em;
 		margin-right: 0.5em;
+		font-size: larger;
+		font-weight: 700;
+	}
+	.wrapper {
+		border-radius: 0.5em;
+		background-color: antiquewhite;
+		overflow: hidden;
 	}
 	.counter {
+		display: flex;
 		background-color: aquamarine;
 		height: 100%;
-		display: flex;
 		justify-content: center;
 		align-items: center;
 		padding: 0.5rem;
@@ -123,16 +140,18 @@
 	.arrow1 {
 		grid-area: arrow1;
 		background-color: cornflowerblue;
+		border-radius: 1em;
 	}
 	.arrow2 {
 		grid-area: arrow2;
+		border-radius: 1em;
 		background-color: cornflowerblue;
 	}
 
-	@media screen and (max-width: 820px) {
+	@media screen and (max-width: 920px) {
 		.dashboard {
 			grid-template-columns: 1fr;
-			grid-template-rows: 1fr 4em 1fr 4em 1fr;
+			grid-template-rows: 1fr 2em 1fr 2em 1fr;
 			grid-template-areas:
 				'upload'
 				'arrow1'
