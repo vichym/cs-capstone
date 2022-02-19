@@ -2,7 +2,6 @@
 	export let picture;
 	export let loadingPromise;
 	import { Card, CardImg, Spinner } from 'sveltestrap';
-	let michael = '../static/michael-scott.gif';
 </script>
 
 {#if picture}
@@ -23,7 +22,7 @@
 	</Card>
 {:else}
 	<div class="picture">
-		<img class=" img-thumbnail picture" src={michael} alt="d" />
+		<img class=" img-thumbnail picture" src="../static/house.jpg" alt="d" />
 	</div>
 {/if}
 
