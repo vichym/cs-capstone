@@ -79,6 +79,8 @@
 <style>
 	.cnntool-section {
 		background: url('/ai.png');
+		background-repeat: no-repeat;
+		background-size: cover;
 		display: flex;
 		width: 100%;
 		height: 100%;
