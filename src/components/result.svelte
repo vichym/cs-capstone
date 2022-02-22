@@ -59,6 +59,8 @@
 		{:else}
 			<div class="hint" in:typewriter={{ speed: 0.5 }}>Upload a Car Picture to Start</div>
 		{/if}
+	{:catch error}
+		<div class="error" in:typewriter={{ speed: 1 }}>{error.message}</div>
 	{/await}
 </div>
 
@@ -86,5 +88,8 @@
 	}
 	.hint {
 		font-size: medium;
+	}
+	.error {
+		color: red;
 	}
 </style>
