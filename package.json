@@ -4,9 +4,10 @@
   "scripts": {
     "dev": "svelte-kit dev",
     "dev-host": "svelte-kit dev --host",
+    "start": "node build/index.js",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
-    "preview": "svelte-kit preview --host",
+    "preview": "svelte-kit preview",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
