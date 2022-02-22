@@ -1,7 +1,6 @@
 <script>
 	import Welcome from '../components/section1.svelte';
-	import About from '../components/section2.svelte';
-	import { elasticIn, quintInOut, circOut } from 'svelte/easing';
+	import { elasticIn, quintInOut } from 'svelte/easing';
 	import CNN from '../components/section3.svelte';
 	let toggleMenu = false;
 	function handleMenu() {
