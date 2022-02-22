@@ -1,12 +1,6 @@
 <script>
 	export let picture, base64Image;
 	let fileinput;
-	let windowH;
-	let windowW;
-	import { Carousel, CarouselItem } from 'sveltestrap';
-
-	$: mheight = windowH * 0.7;
-	$: mwidth = windowW * 0.9;
 
 	const onFileSelected = (e) => {
 		let reader = new FileReader();
@@ -19,8 +13,6 @@
 		};
 	};
 </script>
-
-<svelte:window bind:innerWidth={windowW} bind:innerHeight={windowH} />
 
 <div class="main-container">
 	<div
@@ -36,7 +28,7 @@
 		<input
 			style="display:none"
 			type="file"
-			accept=".jpg, .jpeg, .png"
+			accept="image/*"
 			on:change={(e) => onFileSelected(e)}
 			bind:this={fileinput}
 		/>
