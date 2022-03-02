@@ -6,15 +6,15 @@
 
 	import { BACKEND_API } from '$lib/Env';
 
-	let backend_api;
+	let backend_api = process.env.BACKEND_API;
 
-	if (process.env.NODE_ENV === 'production') {
-		// For production
-		backend_api = process.env.BACKEND_API;
-	} else {
-		// For development
-		backend_api = BACKEND_API;
-	}
+	// if (process.env.NODE_ENV === 'production') {
+	// 	// For production
+	// 	backend_api = process.env.BACKEND_API;
+	// } else {
+	// 	// For development
+	// 	backend_api = BACKEND_API;
+	// }
 
 	let image;
 	let base64Image;
