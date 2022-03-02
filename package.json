@@ -14,6 +14,7 @@
   "devDependencies": {
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
+    "dotenv": "^16.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-svelte3": "^3.2.1",
@@ -26,8 +27,8 @@
     "@sveltejs/adapter-node": "^1.0.0-next.68",
     "sveltestrap": "^5.8.4"
   },
-  "engines": {    
+  "engines": {
     "node": "16.14.0",
     "npm": "8.3.1"
-}
+  }
 }

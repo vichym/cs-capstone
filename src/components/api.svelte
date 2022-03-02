@@ -1,15 +1,19 @@
 <script>
-	export async function getPredition(base64Image) {
-		const res = await fetch('http://10.0.0.60:5000/predict', {
+	export async function getPredition(encodeImage) {
+		const result = await fetch('http://1a88-141-140-239-118.ngrok.io/predict', {
 			method: 'post',
-			body: JSON.stringify({ image: base64Image })
-		});
-		const text = await res.text();
-
-		if (res.ok) {
-			return text;
-		} else {
-			throw new Error(text);
-		}
+			body: JSON.stringify({ image: encodeImage })
+		})
+			.then((res) => {
+				return res.json();
+			})
+			.then((res) => {
+				console.log(res.vgg16_2_model);
+				return res.vgg16_2_model;
+			})
+			.catch((error) => {
+				throw new Error(error);
+			});
+		return result;
 	}
 </script>

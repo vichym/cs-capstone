@@ -3,12 +3,25 @@
 	import Result from './result.svelte';
 	import PhotoFrame from './photoFrame.svelte';
 	import Arrow from './arrow.svelte';
+
+	import { BACKEND_API } from '$lib/Env';
+
+	let backend_api;
+
+	if (process.env.NODE_ENV === 'production') {
+		// For production
+		backend_api = process.env.BACKEND_API;
+	} else {
+		// For development
+		backend_api = BACKEND_API;
+	}
+
 	let image;
 	let base64Image;
 	let predictionPromise;
 
 	async function getPredition(encodeImage) {
-		const result = await fetch('http://127.0.0.1:5000/predict', {
+		const result = await fetch(`${backend_api}/predict`, {
 			method: 'post',
 			body: JSON.stringify({ image: encodeImage })
 		})
@@ -24,7 +37,8 @@
 			});
 		return result;
 	}
-	$: console.log(predictionPromise);
+	// $: console.log(predictionPromise, `${process.env['BACKEND_API']}/predict`);
+
 	$: if (base64Image) {
 		predictionPromise = getPredition(base64Image);
 	}
