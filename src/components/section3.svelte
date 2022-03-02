@@ -7,7 +7,6 @@
 	import { BACKEND_API } from '$lib/Env';
 
 	let backend_api;
-
 	if (process.env.NODE_ENV === 'production') {
 		// For production
 		backend_api = process.env.BACKEND_API;
