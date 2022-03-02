@@ -37,8 +37,6 @@
 			});
 		return result;
 	}
-	// $: console.log(predictionPromise, `${process.env['BACKEND_API']}/predict`);
-
 	$: if (base64Image) {
 		predictionPromise = getPredition(base64Image);
 	}
