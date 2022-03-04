@@ -22,6 +22,7 @@
 	async function getPredition(encodeImage) {
 		const result = await fetch(`${backend_api}/predict`, {
 			method: 'post',
+			mode: 'cors',
 			body: JSON.stringify({ image: encodeImage })
 		})
 			.then((res) => {
